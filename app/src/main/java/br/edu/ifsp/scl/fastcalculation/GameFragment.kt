@@ -16,6 +16,7 @@ import br.edu.scl.ifsp.sdm.fastcalculation.CalculationGame
 
 
 class GameFragment : Fragment() {
+    private lateinit var rightAnswersCount: Any
     private lateinit var fragmentGameBinding: FragmentGameBinding
 
     private lateinit var settings: Settings
@@ -105,5 +106,18 @@ class GameFragment : Fragment() {
                 alternativeThreeBt.visibility = View.GONE
             }
         }
+    }
+    private fun resp() {
+        val score = rightAnswersCount
+        val totalQuestions = 10
+        val resultFragment = ResultFragment()
+        val args = Bundle()
+        args.putInt("score", score as Int)
+        args.putInt("totalQuestions", totalQuestions)
+        resultFragment.arguments = args
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment_container, resultFragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
